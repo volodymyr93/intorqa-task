@@ -1,0 +1,5 @@
+{
+  "monitor.directory": "/Users/volodymyrkostenko/Downloads",
+  "http.port": 8080,
+  "files.watch.iteration": 1000
+}
