@@ -24,7 +24,7 @@ application {
 
 sourceCompatibility = '1.8'
 
-def mainVerticleName = 'com.task.MainVerticle'
+def mainVerticleName = 'com.intorqa.task.MainVerticle'
 def watchForChange = 'src/**/*'
 def doOnChange = './gradlew classes'
 

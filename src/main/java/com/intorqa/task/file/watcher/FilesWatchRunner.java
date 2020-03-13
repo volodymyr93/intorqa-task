@@ -30,7 +30,7 @@ public class FilesWatchRunner extends AbstractVerticle {
                     log.debug("monitor");
                     Map<String, Long> changedFiles = filesWatchService.poll();
                     List<String> changedFilesEligibleForProcessing = changedFiles.entrySet().stream()
-                            .filter(fileEntry -> !processedFilesStorage.eligibleForProcessing(fileEntry.getKey(), fileEntry.getValue()))
+                            .filter(fileEntry -> processedFilesStorage.eligibleForProcessing(fileEntry.getKey(), fileEntry.getValue()))
                             .map(Map.Entry::getKey)
                             .collect(toList());
                     promise.complete(changedFilesEligibleForProcessing);

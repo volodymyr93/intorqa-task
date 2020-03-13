@@ -13,6 +13,7 @@ import com.intorqa.task.processor.WordsUniqueCountProcessor;
 import com.intorqa.task.rest.HttpServer;
 import com.intorqa.task.rest.RouterService;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -20,18 +21,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainVerticle extends AbstractVerticle {
 
-    //TODO add comments
-    //TODO check invalid values in handlers
-    //TODO properly close app
     @Override
     public void start() {
         try {
+            DeploymentOptions options = new DeploymentOptions();
+            options.setConfig(config());
+
             ParsedDataStorage storage = new ParsedDataStorage();
+
             vertx.deployVerticle(
                     new FilesWatchRunner(
                             new FilesWatchService(config().getString("monitor.directory")), //Please, change directory value in config.json in order to run app
                             new ProcessedFilesStorage()
-                    )
+                    ), options
             );
             vertx.deployVerticle(new FilesParser());
             vertx.deployVerticle(new WordsCountProcessor(storage));
@@ -44,7 +46,7 @@ public class MainVerticle extends AbstractVerticle {
                                     vertx,
                                     new ParsedDataService(storage)
                             )
-                    )
+                    ), options
             );
         } catch (Exception e) {
             log.error("error while initializing application", e);
