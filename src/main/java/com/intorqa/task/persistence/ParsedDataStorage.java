@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+// Let's pretend this is a database interface
 @Getter
 public class ParsedDataStorage {
 

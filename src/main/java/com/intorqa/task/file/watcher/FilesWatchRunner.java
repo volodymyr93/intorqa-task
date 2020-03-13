@@ -11,6 +11,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
+// Monitors directory in order to find changes in files (new or modified)
 @Slf4j
 @AllArgsConstructor
 public class FilesWatchRunner extends AbstractVerticle {

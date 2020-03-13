@@ -2,7 +2,12 @@ package com.intorqa.task.file.watcher;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,9 +25,9 @@ public class FilesWatchService {
         this.watchService = FileSystems.getDefault().newWatchService();
 
         Path path = Paths.get(directory);
-        path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY);
-    }
-
+        path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY); // Currently it looks for new and modified files as required.
+    }                                                            // But in my opinion it is better to monitor only new files, because
+                                                                 // parsing modified files can produce ambiguous data.
     public Map<String, Long> poll() {
         WatchKey key = watchService.poll();
         if (key != null) {

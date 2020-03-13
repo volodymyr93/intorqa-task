@@ -14,6 +14,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+// This class has naive implementation of parsing.
+// I made this because I believe the goal of this task is not a perfect parser but scalable application.
+// In order to count words properly file should end with \n character.
 @Slf4j
 public class FilesParser extends AbstractVerticle {
 
@@ -35,9 +38,9 @@ public class FilesParser extends AbstractVerticle {
             Arrays.stream(bufferedLine.toString().split(" "))
                     .filter(word -> !word.isEmpty())
                     .forEach(word ->
-                            vertx.eventBus().publish(
-                                    "words.parsed",
-                                    JsonObject.mapFrom(new ParsedRecord(fileName, word))
+                            vertx.eventBus().publish(                                       // Potentially different processors can be in different application
+                                    "words.parsed",                                // or in separate classes like in my implementation.
+                                    JsonObject.mapFrom(new ParsedRecord(fileName, word))    // Parsing files and words processing are decoupled. This helps scale application
                             )
                     );
         });

@@ -15,12 +15,11 @@ import com.intorqa.task.rest.RouterService;
 import io.vertx.core.AbstractVerticle;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.file.FileSystems;
 
+// Please, call localhost:8080/reports in order to obtain results
 @Slf4j
 public class MainVerticle extends AbstractVerticle {
 
-    //TODO add tests
     //TODO add comments
     //TODO check invalid values in handlers
     //TODO properly close app
@@ -30,7 +29,7 @@ public class MainVerticle extends AbstractVerticle {
             ParsedDataStorage storage = new ParsedDataStorage();
             vertx.deployVerticle(
                     new FilesWatchRunner(
-                            new FilesWatchService(config().getString("monitor.directory")),
+                            new FilesWatchService(config().getString("monitor.directory")), //Please, change directory value in config.json in order to run app
                             new ProcessedFilesStorage()
                     )
             );
