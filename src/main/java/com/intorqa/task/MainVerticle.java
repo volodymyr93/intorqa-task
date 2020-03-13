@@ -52,4 +52,9 @@ public class MainVerticle extends AbstractVerticle {
             log.error("error while initializing application", e);
         }
     }
+
+    @Override
+    public void stop() {
+        vertx.close();
+    }
 }
