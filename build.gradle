@@ -16,6 +16,11 @@ ext {
     junitJupiterEngineVersion = '5.4.0'
     lombokVersion = '1.18.4'
     apacheCollectinsVersion = '4.1'
+    slf4jVersion = '1.7.30'
+    guavaVersion = '19.0'
+    mockitoVersion = '3.3.0'
+    assertjVersion = '3.15.0'
+    awaitilityVersion = '4.0.2'
 }
 
 application {
@@ -31,20 +36,20 @@ def doOnChange = './gradlew classes'
 dependencies {
     compile "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    compile group: 'com.google.guava', name: 'guava', version: '19.0'
-    compile "org.slf4j:slf4j-api:1.7.30"
-    compile "org.slf4j:slf4j-simple:1.7.30"
+    compile "com.google.guava:guava:$guavaVersion"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "org.slf4j:slf4j-simple:$slf4jVersion"
 
     implementation "io.vertx:vertx-web-client:$vertxVersion"
     implementation "io.vertx:vertx-config:$vertxVersion"
     implementation "io.vertx:vertx-web:$vertxVersion"
 
     testImplementation "io.vertx:vertx-junit5:$vertxVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterEngineVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitJupiterEngineVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterEngineVersion"
-    testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.3.0'
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.15.0'
-    testImplementation 'org.awaitility:awaitility:4.0.2'
+    testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+    testImplementation "org.awaitility:awaitility:$awaitilityVersion"
 }
 
 
